@@ -1,0 +1,6 @@
+*.user
+*build*
+*Debug*
+*debug*
+*Release*
+*release*
