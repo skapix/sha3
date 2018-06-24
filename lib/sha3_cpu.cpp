@@ -2,7 +2,7 @@
 #include "common.h"
 #include <array>
 #include <cstdlib>
-#include <omp.h> // batch SHA3
+#include <omp.h>
 
 namespace
 {

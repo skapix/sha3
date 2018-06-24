@@ -2,7 +2,7 @@ project(sha3_lib C CXX CUDA)
 
 set(CMAKE_CXX_STANDARD 17)
 
-find_package(OpenMP)
+find_package(OpenMP REQUIRED)
 
 set(files
     util.h

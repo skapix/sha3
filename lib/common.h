@@ -1,17 +1,11 @@
 #pragma once
 #include <cstdint>
 #include <cassert>
+#ifdef __linux__
+#include <endian.h>
+#endif // __linux__
 
-constexpr bool isLittleEndian()
-{
-  union
-  {
-    uint16_t i;
-    char c[sizeof(i)];
-  } lint = {0x0102};
-
-  return lint.c[0] == 2;
-}
+constexpr bool isLittleEndian() { return __BYTE_ORDER == __LITTLE_ENDIAN; }
 
 constexpr uint64_t rotateLeft(uint64_t x, unsigned n)
 {
@@ -30,10 +24,10 @@ constexpr void _swap(uint8_t &v1, uint8_t &v2)
 
 constexpr uint64_t toLittleEndian(uint64_t val)
 {
-  if (isLittleEndian())
-  {
-    return val;
-  }
+  // use such coding to omit NVCC warning
+#if __BYTE_ORDER == __LITTLE_ENDIAN
+  return val;
+#else
   uint8_t *ptr = reinterpret_cast<uint8_t *>(&val);
 
   _swap(ptr[0], ptr[7]);
@@ -41,4 +35,5 @@ constexpr uint64_t toLittleEndian(uint64_t val)
   _swap(ptr[2], ptr[5]);
   _swap(ptr[3], ptr[4]);
   return val;
+#endif
 }
