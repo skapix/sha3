@@ -1,7 +1,5 @@
 cmake_minimum_required(VERSION 3.0)
 
-set(CMAKE_CUDA_FLAGS "-gencode arch=compute_50,code=sm_50")
-
 project (
     sha3
     VERSION 1.0
